@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OM606 Clicker</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    .game {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    #score {
+      font-size: 50px;
+      font-weight: bold;
+      margin: 30px;
+    }
+
+    button {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: none;
+      background: #e0e0e0;
+      font-size: 28px;
+      font-weight: bold;
+      color: #111;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .info {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="game">
+    <h1>OM606 CLICKER</h1>
+
+    <div id="score">0</div>
+
+    <button onclick="clickEngine()">
+      🔧<br>
+      ГАЗ!
+    </button>
+
+    <div class="info">
+      Мощность: <span id="power">1</span>
+    </div>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+
+    let score = 0;
+    let power = 1;
+
+    function clickEngine() {
+      score += power;
+      document.getElementById("score").textContent = score;
+    }
+  </script>
+
+</body>
+</html>
