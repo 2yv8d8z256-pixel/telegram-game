@@ -112,17 +112,26 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
-let score = 0;
-let power = 1;
+let score = Number(localStorage.getItem("om606_score")) || 0;
+let power = Number(localStorage.getItem("om606_power")) || 1;
 
-let upgrades = {
+let upgrades = JSON.parse(
+  localStorage.getItem("om606_upgrades")
+) || {
   1: false,
   2: false,
   3: false
 };
 
+function saveGame() {
+  localStorage.setItem("om606_score", score);
+  localStorage.setItem("om606_power", power);
+  localStorage.setItem("om606_upgrades", JSON.stringify(upgrades));
+}
+
 function clickEngine() {
   score += power;
+  saveGame();
   update();
 }
 
@@ -151,7 +160,8 @@ function buyUpgrade(stage) {
     score -= price;
     power += bonus;
     upgrades[stage] = true;
-
+saveGame();
+    update();
     update();
   }
 }
